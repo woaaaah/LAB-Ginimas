@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -33,32 +30,37 @@ public class Main {
         studentai.add(Akvile);
 
 
-        String grupes;
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Iveskite kokios grupes studentu skaiciu norite matyti");
-        grupes = scan.next();
-        for (Studentas zmogus : studentai) {
-            grupes = zmogus.getGrupe();
-
-        }
-
         System.out.println("Visi fakulteto studentai");
         System.out.println(studentai);
 
 
-        System.out.println("Studentai pagal pazanguma nuo geriausio");
+        System.out.println("\n Studentai pagal pazanguma nuo geriausio");
         studentai.sort(Comparator.comparing(Studentas::getVidurkis, Collections.reverseOrder()));
         System.out.println(studentai);
 
 
+        System.out.println("\n Pasalinti studentai kuriu vidurkis maziau nei 4");
         studentai.removeIf(obj -> obj.getVidurkis() < 4);
         System.out.println(studentai);
+
+        Scanner S = new Scanner(System.in);
+        System.out.println("\n Studentu kiekvienoi grupei skaicaivimas");
+        System.out.println("Iveskite grupe");
+        String stugrupe = S.nextLine();
+        System.out.println("Studentu skaicius grupeje"+gautiFakultetoStudentus(stugrupe,studentai));
     }
 
-    public static int findgroup(String group) {
-
+    public static int gautiFakultetoStudentus(String grupe, ArrayList studentai) {
+        int studentuskaicius=0;
+        for (Studentas fakultetas1 : (Iterable<Studentas>) studentai) {
+            if (fakultetas1.getGrupe().equals(grupe)) {
+                studentuskaicius++;
+            }
+        }
+        return studentuskaicius;
     }
 }
+
 
 
 
